@@ -9,7 +9,7 @@ namespace Saucedemo.Tests
 {
     internal class CheckoutTest: BaseTest
     {
-        [Test]
+        [Test, Category("Positive")]
         public void Test1()
         {
             string userName = "standard_user";
@@ -19,15 +19,33 @@ namespace Saucedemo.Tests
             string zipCode = "123456";
             var expectedCompleteMessage = "Thank you for your order!";
 
-            LoginPage.Login(userName, password);
-            InventoryPage.ClickAddToCartButtonForBackpack();
-            InventoryPage.ClickShoppingCartLink();
-            CartPage.ClickCheckoutButton();
-            CheckoutYourInfoPage.InputUserInfo(firstName, lastName, zipCode);
-            CheckoutYourInfoPage.ClickContinueButton();
-            CheckoutOverviewPage.ClickFinishButton();
+            LoginPage
+               .SuccessfulLogin(userName, password)
+               .ClickAddToCartButtonForBackpack()
+               .ClickShoppingCartLink()
+               .ClickCheckoutButton()
+               .CorrectInputUserInfo(firstName, lastName, zipCode)
+               .ClickFinishButton();           
 
             Assert.That(CheckoutCompletePage.CheckCompleteMessage, Is.EqualTo(expectedCompleteMessage));
+        }
+
+        [Test, Category("Negative")]
+        public void Test2()
+        {
+            string userName = "standard_user";
+            string password = "secret_sauce";
+            string firstName = "John";
+            string lastName = "Smith";
+
+            LoginPage
+               .SuccessfulLogin(userName, password)
+               .ClickAddToCartButtonForBackpack()
+               .ClickShoppingCartLink()
+               .ClickCheckoutButton()
+               .IncorrectInputUserInfo(firstName, lastName);
+
+            Assert.IsTrue(CheckoutYourInfoPage.CheckCartErrorMessage());
         }
     }
 }

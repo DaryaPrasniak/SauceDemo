@@ -19,9 +19,10 @@ namespace Saucedemo.Pages
           return ChromeDriver.FindElements(ItemInTheCartBy).Count();
         }
 
-        public void ClickCheckoutButton()
+        public CheckoutYourInfoPage ClickCheckoutButton()
         {
             ChromeDriver.FindElement(CheckoutButtonBy).Click();
+            return new CheckoutYourInfoPage(ChromeDriver);
         }
     }
 }

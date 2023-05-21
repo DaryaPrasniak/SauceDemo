@@ -15,9 +15,10 @@ namespace Saucedemo.Tests
             string userName = "standard_user";
             string password = "secret_sauce";
 
-            LoginPage.Login(userName, password);
-            InventoryPage.ClickAddToCartButtonForBackpack();
-            InventoryPage.ClickShoppingCartLink();
+            LoginPage
+               .SuccessfulLogin(userName, password)
+               .ClickAddToCartButtonForBackpack()
+               .ClickShoppingCartLink();
 
             var itemsAmount = CartPage.CheckItemInTheCart();
 

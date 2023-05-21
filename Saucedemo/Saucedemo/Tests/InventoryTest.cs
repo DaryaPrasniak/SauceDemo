@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using NUnit.Framework.Internal;
+using Saucedemo.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +17,9 @@ namespace Saucedemo.Tests
             string userName = "standard_user";
             string password = "secret_sauce";
 
-            LoginPage.Login(userName, password);
-            InventoryPage.ClickFirstInventoryItemLink();
+            LoginPage 
+                .SuccessfulLogin(userName, password)
+                .ClickFirstInventoryItemLink();
 
             Assert.IsTrue(ItemDetailedInfoPage.CheckBackToProductsButton());
         }
@@ -28,8 +30,9 @@ namespace Saucedemo.Tests
             string userName = "standard_user";
             string password = "secret_sauce";
 
-            LoginPage.Login(userName, password);
-            InventoryPage.ClickSecondInventoryItemLink();
+            LoginPage
+               .SuccessfulLogin(userName, password)
+               .ClickSecondInventoryItemLink();
 
             Assert.IsTrue(ItemDetailedInfoPage.CheckBackToProductsButton());
         }
@@ -40,8 +43,9 @@ namespace Saucedemo.Tests
             string userName = "standard_user";
             string password = "secret_sauce";
 
-            LoginPage.Login(userName, password);
-            InventoryPage.ClickThirdInventoryItemLink();
+            LoginPage
+               .SuccessfulLogin(userName, password)
+               .ClickThirdInventoryItemLink();
 
             Assert.IsTrue(ItemDetailedInfoPage.CheckBackToProductsButton());
         }

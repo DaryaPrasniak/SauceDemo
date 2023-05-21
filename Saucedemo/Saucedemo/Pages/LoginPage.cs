@@ -12,6 +12,7 @@ namespace Saucedemo.Pages
         By UserNameInputBy = By.Name("user-name");
         By PasswordInputBy = By.Name("password");
         By LoginButtonBy = By.Name("login-button");
+        By ErrorMessageBy = By.ClassName("error-message-container");
 
         public LoginPage(WebDriver driver) : base(driver) { }
 
@@ -35,6 +36,23 @@ namespace Saucedemo.Pages
             InputUserName(userName);
             InputPassword(password);
             ClickLoginButton();
+        }
+
+        public InventoryPage SuccessfulLogin(string userName, string password)
+        {
+            Login(userName, password);
+            return new InventoryPage(ChromeDriver);
+        }
+
+        public LoginPage IncorrectLogin(string userName, string password)
+        {
+            Login(userName, password);
+            return this;
+        }
+
+        public bool CheckErrorMessage()
+        {
+           return ChromeDriver.FindElement(ErrorMessageBy).Displayed;
         }
     }
 }

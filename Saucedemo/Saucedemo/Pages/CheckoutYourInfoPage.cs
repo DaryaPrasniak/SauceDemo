@@ -13,6 +13,7 @@ namespace Saucedemo.Pages
         By LastNameInputBy = By.Id("last-name");
         By ZipPostalCodeInputBy = By.Id("postal-code");
         By ContinueButtonBy = By.Id("continue");
+        By CartErrorMessageBy = By.ClassName("error-button");
 
         public CheckoutYourInfoPage(WebDriver driver) : base(driver) { }
 
@@ -41,6 +42,26 @@ namespace Saucedemo.Pages
             SetFirstName(firstName);
             SetLastName(lastName); 
             SetZipOrPostalCode(zipCode);
+            ClickContinueButton();
+        }
+
+        public CheckoutOverviewPage CorrectInputUserInfo(string firstName, string lastName, string zipCode)
+        { 
+            InputUserInfo(firstName, lastName, zipCode);
+            return new CheckoutOverviewPage(ChromeDriver);
+        }
+
+        public CheckoutYourInfoPage IncorrectInputUserInfo(string firstName, string lastName)
+        {
+            SetFirstName(firstName);
+            SetLastName(lastName);
+            ClickContinueButton();
+            return this;
+        }
+
+        public bool CheckCartErrorMessage()
+        {
+           return ChromeDriver.FindElement(CartErrorMessageBy).Displayed;
         }
     }
 }

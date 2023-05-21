@@ -9,7 +9,7 @@ namespace Saucedemo.Pages
 {
     internal class InventoryPage: BasePage
     {
-        By InventoryContainerBy = By.ClassName("inventory_list");
+        By InventoryContainerBy = By.Id("inventory_container");
         By FirstInventoryItemLinkBy = By.LinkText("Sauce Labs Backpack");
         By SecondInventoryItemLinkBy = By.LinkText("Sauce Labs Bike Light");
         By ThirdInventoryItemLinkBy = By.LinkText("Sauce Labs Bolt T-Shirt");
@@ -37,14 +37,16 @@ namespace Saucedemo.Pages
             ChromeDriver.FindElement(ThirdInventoryItemLinkBy).Click();
         }
 
-        public void ClickAddToCartButtonForBackpack()
+        public InventoryPage ClickAddToCartButtonForBackpack()
         { 
-            ChromeDriver.FindElement(AddToCartButtonForBackpackBy).Click(); 
+            ChromeDriver.FindElement(AddToCartButtonForBackpackBy).Click();
+            return this;
         }
 
-        public void ClickShoppingCartLink()
+        public CartPage ClickShoppingCartLink()
         {
             ChromeDriver.FindElement(ShoppingCartLink).Click();
+            return new CartPage(ChromeDriver);
         }
     }
 }
