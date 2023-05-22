@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using Saucedemo.Tests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,26 +16,55 @@ namespace Saucedemo.Pages
         By ThirdInventoryItemLinkBy = By.LinkText("Sauce Labs Bolt T-Shirt");
         By AddToCartButtonForBackpackBy = By.Id("add-to-cart-sauce-labs-backpack");
         By ShoppingCartLink = By.ClassName("shopping_cart_link");
-        public InventoryPage(WebDriver driver) : base(driver) { }
+        public InventoryPage(IWebDriver? driver, bool openPageByUrl) : base(driver, openPageByUrl)
+        {
+        }
+
+        public InventoryPage(IWebDriver? driver) : base(driver, false)
+        {
+        }
+
+        protected override void OpenPage()
+        {
+            ChromeDriver.Navigate().GoToUrl(BaseTest.BaseUrl + "inventory.html");
+        }
+
+        public override bool IsPageOpened()
+        {
+            try
+            {
+                return ChromeDriver.FindElement(InventoryContainerBy).Displayed;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
 
         public bool CheckInventoryItemsOnThePage()
         {
           return ChromeDriver.FindElement(InventoryContainerBy).Displayed;
         }
 
-        public void ClickFirstInventoryItemLink()
+        public ItemDetailedInfoPage ClickFirstInventoryItemLink()
         {
             ChromeDriver.FindElement(FirstInventoryItemLinkBy).Click();
+
+            return new ItemDetailedInfoPage(ChromeDriver);
         }
 
-        public void ClickSecondInventoryItemLink()
+        public ItemDetailedInfoPage ClickSecondInventoryItemLink()
         {
             ChromeDriver.FindElement(SecondInventoryItemLinkBy).Click();
+
+            return new ItemDetailedInfoPage(ChromeDriver);
         }
 
-        public void ClickThirdInventoryItemLink()
+        public ItemDetailedInfoPage ClickThirdInventoryItemLink()
         {
             ChromeDriver.FindElement(ThirdInventoryItemLinkBy).Click();
+
+            return new ItemDetailedInfoPage(ChromeDriver);
         }
 
         public InventoryPage ClickAddToCartButtonForBackpack()

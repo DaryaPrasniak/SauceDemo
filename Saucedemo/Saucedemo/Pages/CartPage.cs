@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using Saucedemo.Tests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,30 @@ namespace Saucedemo.Pages
         By ItemInTheCartBy = By.ClassName("cart_item");
         By CheckoutButtonBy = By.Id("checkout");
 
-        public CartPage(WebDriver driver) : base(driver) { }
+        public CartPage(IWebDriver? driver, bool openPageByUrl) : base(driver, openPageByUrl)
+        {
+        }
+
+        public CartPage(IWebDriver? driver) : base(driver, false)
+        {
+        }
+
+        protected override void OpenPage()
+        {
+            ChromeDriver.Navigate().GoToUrl(BaseTest.BaseUrl + "cart.html");
+        }
+
+        public override bool IsPageOpened()
+        {
+            try
+            {
+                return ChromeDriver.FindElement(CheckoutButtonBy).Displayed;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
 
         public int CheckItemInTheCart()
         {

@@ -17,11 +17,11 @@ namespace Saucedemo.Tests
             string userName = "standard_user";
             string password = "secret_sauce";
 
-            LoginPage loginPage = new LoginPage(ChromeDriver);
-            LoginPage
-            .SuccessfulLogin(userName, password);             
+            LoginPage loginPage = new LoginPage(ChromeDriver, true);
 
-            Assert.IsTrue(InventoryPage.CheckInventoryItemsOnThePage());  
+            var inventoryPage = loginPage.SuccessfulLogin(userName, password);  
+
+            Assert.IsTrue(inventoryPage.CheckInventoryItemsOnThePage());  
         }
 
         [Test, Category("Negative")]
@@ -30,11 +30,10 @@ namespace Saucedemo.Tests
             string userName = "standard_user";
             string password = "secret_sauce123";
 
-            LoginPage loginPage = new LoginPage(ChromeDriver);
-            LoginPage
-            .IncorrectLogin(userName, password);
+            LoginPage loginPage = new LoginPage(ChromeDriver, true);
+            loginPage.IncorrectLogin(userName, password);
 
-            Assert.IsTrue(LoginPage.CheckErrorMessage());
+            Assert.IsTrue(loginPage.CheckErrorMessage());
         }
     }
 }

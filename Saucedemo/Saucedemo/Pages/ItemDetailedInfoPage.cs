@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using Saucedemo.Tests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,30 @@ namespace Saucedemo.Pages
     {
         By BackToProductsButtonBy = By.Id("back-to-products");
 
-        public ItemDetailedInfoPage(WebDriver driver) : base(driver) { }
+        public ItemDetailedInfoPage(IWebDriver? driver, bool openPageByUrl) : base(driver, openPageByUrl)
+        {
+        }
+
+        public ItemDetailedInfoPage(IWebDriver? driver) : base(driver, false)
+        {
+        }
+
+        protected override void OpenPage()
+        {
+            ChromeDriver.Navigate().GoToUrl(BaseTest.BaseUrl + "inventory-item.html?id=4");
+        }
+
+        public override bool IsPageOpened()
+        {
+            try
+            {
+                return ChromeDriver.FindElement(BackToProductsButtonBy).Displayed;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
 
         public bool CheckBackToProductsButton()
         {

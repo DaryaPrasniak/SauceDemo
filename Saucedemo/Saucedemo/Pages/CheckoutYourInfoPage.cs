@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using Saucedemo.Tests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,30 @@ namespace Saucedemo.Pages
         By ContinueButtonBy = By.Id("continue");
         By CartErrorMessageBy = By.ClassName("error-button");
 
-        public CheckoutYourInfoPage(WebDriver driver) : base(driver) { }
+        public CheckoutYourInfoPage(IWebDriver? driver, bool openPageByUrl) : base(driver, openPageByUrl)
+        {
+        }
+
+        public CheckoutYourInfoPage(IWebDriver? driver) : base(driver, false)
+        {
+        }
+
+        protected override void OpenPage()
+        {
+            ChromeDriver.Navigate().GoToUrl(BaseTest.BaseUrl + "checkout-step-one.html");
+        }
+
+        public override bool IsPageOpened()
+        {
+            try
+            {
+                return ChromeDriver.FindElement(ContinueButtonBy).Displayed;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
 
         public void SetFirstName(string firstName)
         {

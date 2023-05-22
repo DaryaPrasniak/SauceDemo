@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Saucedemo.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace Saucedemo.Tests
             string zipCode = "123456";
             var expectedCompleteMessage = "Thank you for your order!";
 
-            LoginPage
+            var checkoutCompletePage = new LoginPage(ChromeDriver, true)
                .SuccessfulLogin(userName, password)
                .ClickAddToCartButtonForBackpack()
                .ClickShoppingCartLink()
@@ -27,7 +28,7 @@ namespace Saucedemo.Tests
                .CorrectInputUserInfo(firstName, lastName, zipCode)
                .ClickFinishButton();           
 
-            Assert.That(CheckoutCompletePage.CheckCompleteMessage, Is.EqualTo(expectedCompleteMessage));
+            Assert.That(checkoutCompletePage.CheckCompleteMessage, Is.EqualTo(expectedCompleteMessage));
         }
 
         [Test, Category("Negative")]
@@ -38,14 +39,14 @@ namespace Saucedemo.Tests
             string firstName = "John";
             string lastName = "Smith";
 
-            LoginPage
+            var checkoutYourInfoPage = new LoginPage(ChromeDriver, true)
                .SuccessfulLogin(userName, password)
                .ClickAddToCartButtonForBackpack()
                .ClickShoppingCartLink()
                .ClickCheckoutButton()
                .IncorrectInputUserInfo(firstName, lastName);
 
-            Assert.IsTrue(CheckoutYourInfoPage.CheckCartErrorMessage());
+            Assert.IsTrue(checkoutYourInfoPage.CheckCartErrorMessage());
         }
     }
 }

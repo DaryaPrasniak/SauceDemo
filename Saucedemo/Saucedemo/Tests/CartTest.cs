@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Saucedemo.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,12 @@ namespace Saucedemo.Tests
             string userName = "standard_user";
             string password = "secret_sauce";
 
-            LoginPage
+            var cartPage = new LoginPage(ChromeDriver, true)
                .SuccessfulLogin(userName, password)
                .ClickAddToCartButtonForBackpack()
                .ClickShoppingCartLink();
 
-            var itemsAmount = CartPage.CheckItemInTheCart();
+            var itemsAmount = cartPage.CheckItemInTheCart();
 
             Assert.AreEqual(itemsAmount, 1);           
         }

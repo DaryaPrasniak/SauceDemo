@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using Saucedemo.Tests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,35 @@ namespace Saucedemo.Pages
     {
         By FinishButtonBy = By.Id("finish");
 
-        public CheckoutOverviewPage(WebDriver driver) : base(driver) { }
+        public CheckoutOverviewPage(IWebDriver? driver, bool openPageByUrl) : base(driver, openPageByUrl)
+        {
+        }
 
-        public void ClickFinishButton()
+        public CheckoutOverviewPage(IWebDriver? driver) : base(driver, false)
+        {
+        }
+
+        protected override void OpenPage()
+        {
+            ChromeDriver.Navigate().GoToUrl(BaseTest.BaseUrl + "checkout-step-two.html");
+        }
+
+        public override bool IsPageOpened()
+        {
+            try
+            {
+                return ChromeDriver.FindElement(FinishButtonBy).Displayed;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public CheckoutCompletePage ClickFinishButton()
         { 
             ChromeDriver.FindElement(FinishButtonBy).Click();
+            return new CheckoutCompletePage(ChromeDriver);
         }
     }
 }
