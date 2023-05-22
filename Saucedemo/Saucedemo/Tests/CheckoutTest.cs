@@ -13,19 +13,16 @@ namespace Saucedemo.Tests
         [Test, Category("Positive")]
         public void Test1()
         {
-            string userName = "standard_user";
-            string password = "secret_sauce";
-            string firstName = "John";
-            string lastName = "Smith";
-            string zipCode = "123456";
+            var user = GetUser();
+
             var expectedCompleteMessage = "Thank you for your order!";
 
             var checkoutCompletePage = new LoginPage(ChromeDriver, true)
-               .SuccessfulLogin(userName, password)
+               .SuccessfulLogin(user)
                .ClickAddToCartButtonForBackpack()
                .ClickShoppingCartLink()
                .ClickCheckoutButton()
-               .CorrectInputUserInfo(firstName, lastName, zipCode)
+               .CorrectInputUserInfo(user)
                .ClickFinishButton();           
 
             Assert.That(checkoutCompletePage.CheckCompleteMessage, Is.EqualTo(expectedCompleteMessage));
@@ -34,17 +31,14 @@ namespace Saucedemo.Tests
         [Test, Category("Negative")]
         public void Test2()
         {
-            string userName = "standard_user";
-            string password = "secret_sauce";
-            string firstName = "John";
-            string lastName = "Smith";
+            var user = GetUser();
 
             var checkoutYourInfoPage = new LoginPage(ChromeDriver, true)
-               .SuccessfulLogin(userName, password)
+               .SuccessfulLogin(user)
                .ClickAddToCartButtonForBackpack()
                .ClickShoppingCartLink()
                .ClickCheckoutButton()
-               .IncorrectInputUserInfo(firstName, lastName);
+               .IncorrectInputUserInfo(user);
 
             Assert.IsTrue(checkoutYourInfoPage.CheckCartErrorMessage());
         }

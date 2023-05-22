@@ -14,11 +14,10 @@ namespace Saucedemo.Tests
         [Test]
         public void Test1()
         {
-            string userName = "standard_user";
-            string password = "secret_sauce";
+            var user = GetUser();
 
             var itemDetailedInfoPage = new LoginPage(ChromeDriver, true)
-                .SuccessfulLogin(userName, password)
+                .SuccessfulLogin(user)
                 .ClickFirstInventoryItemLink();
 
             Assert.IsTrue(itemDetailedInfoPage.CheckBackToProductsButton());
@@ -27,11 +26,10 @@ namespace Saucedemo.Tests
         [Test]
         public void Test2()
         {
-            string userName = "standard_user";
-            string password = "secret_sauce";
+            var user = GetUser();
 
             var itemDetailedInfoPage = new LoginPage(ChromeDriver, true)
-               .SuccessfulLogin(userName, password)
+               .SuccessfulLogin(user)
                .ClickSecondInventoryItemLink();
 
             Assert.IsTrue(itemDetailedInfoPage.CheckBackToProductsButton());
@@ -40,11 +38,10 @@ namespace Saucedemo.Tests
         [Test]
         public void Test3()
         {
-            string userName = "standard_user";
-            string password = "secret_sauce";
+            var user = GetUser();
 
             var itemDetailedInfoPage = new LoginPage(ChromeDriver, true)
-               .SuccessfulLogin(userName, password)
+               .SuccessfulLogin(user)
                .ClickThirdInventoryItemLink();
 
             Assert.IsTrue(itemDetailedInfoPage.CheckBackToProductsButton());

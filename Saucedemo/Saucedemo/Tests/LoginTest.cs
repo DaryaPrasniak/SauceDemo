@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Core.Models;
+using NUnit.Framework;
 using NUnit.Framework.Internal;
 using Saucedemo.Pages;
 using System;
@@ -14,12 +15,11 @@ namespace Saucedemo.Tests
         [Test, Category("Positive")]
         public void Test1()
         {
-            string userName = "standard_user";
-            string password = "secret_sauce";
+            var user = GetUser();
 
-            LoginPage loginPage = new LoginPage(ChromeDriver, true);
+            LoginPage loginPage = new LoginPage(ChromeDriver, true);         
 
-            var inventoryPage = loginPage.SuccessfulLogin(userName, password);  
+            var inventoryPage = loginPage.SuccessfulLogin(user);  
 
             Assert.IsTrue(inventoryPage.CheckInventoryItemsOnThePage());  
         }
@@ -27,11 +27,10 @@ namespace Saucedemo.Tests
         [Test, Category("Negative")]
         public void Test2()
         {
-            string userName = "standard_user";
-            string password = "secret_sauce123";
+            var invalidUser = GetInvalidUser();
 
             LoginPage loginPage = new LoginPage(ChromeDriver, true);
-            loginPage.IncorrectLogin(userName, password);
+            loginPage.IncorrectLogin(invalidUser);
 
             Assert.IsTrue(loginPage.CheckErrorMessage());
         }

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Core.Models;
+using OpenQA.Selenium;
 using Saucedemo.Tests;
 using System;
 using System.Collections.Generic;
@@ -55,22 +56,22 @@ namespace Saucedemo.Pages
             ChromeDriver.FindElement(LoginButtonBy).Click();
         }
 
-        public void Login(string userName, string password)
+        public void Login(User user)
         {
-            InputUserName(userName);
-            InputPassword(password);
+            InputUserName(user.UserName);
+            InputPassword(user.Password);
             ClickLoginButton();
         }
 
-        public InventoryPage SuccessfulLogin(string userName, string password)
+        public InventoryPage SuccessfulLogin(User user)
         {
-            Login(userName, password);
+            Login(user);
             return new InventoryPage(ChromeDriver);
         }
 
-        public LoginPage IncorrectLogin(string userName, string password)
+        public LoginPage IncorrectLogin(User user)
         {
-            Login(userName, password);
+            Login(user);
             return this;
         }
 

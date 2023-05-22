@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Core.Models;
+using OpenQA.Selenium;
 using Saucedemo.Tests;
 using System;
 using System.Collections.Generic;
@@ -61,24 +62,24 @@ namespace Saucedemo.Pages
             ChromeDriver.FindElement(ContinueButtonBy).Click();
         }
 
-        public void InputUserInfo(string firstName, string lastName, string zipCode)
+        public void InputUserInfo(User user)
         { 
-            SetFirstName(firstName);
-            SetLastName(lastName); 
-            SetZipOrPostalCode(zipCode);
+            SetFirstName(user.FirstName);
+            SetLastName(user.LastName); 
+            SetZipOrPostalCode(user.ZipCode);
             ClickContinueButton();
         }
 
-        public CheckoutOverviewPage CorrectInputUserInfo(string firstName, string lastName, string zipCode)
+        public CheckoutOverviewPage CorrectInputUserInfo(User user)
         { 
-            InputUserInfo(firstName, lastName, zipCode);
+            InputUserInfo(user);
             return new CheckoutOverviewPage(ChromeDriver);
         }
 
-        public CheckoutYourInfoPage IncorrectInputUserInfo(string firstName, string lastName)
+        public CheckoutYourInfoPage IncorrectInputUserInfo(User user)
         {
-            SetFirstName(firstName);
-            SetLastName(lastName);
+            SetFirstName(user.FirstName);
+            SetLastName(user.LastName);
             ClickContinueButton();
             return this;
         }
