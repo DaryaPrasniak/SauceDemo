@@ -1,4 +1,5 @@
-﻿using Core.Models;
+﻿using Core;
+using Core.Models;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using System;

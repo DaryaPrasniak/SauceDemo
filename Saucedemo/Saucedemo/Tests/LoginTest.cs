@@ -15,7 +15,12 @@ namespace Saucedemo.Tests
         [Test, Category("Positive")]
         public void Test1()
         {
-            var user = GetUser();
+            UserBuilder builder = new UserBuilder();
+
+            User user = builder
+                .SetUserName("standard_user")
+                .SetPassword("secret_sauce")
+                .Build();
 
             LoginPage loginPage = new LoginPage(ChromeDriver, true);         
 
@@ -27,7 +32,12 @@ namespace Saucedemo.Tests
         [Test, Category("Negative")]
         public void Test2()
         {
-            var invalidUser = GetInvalidUser();
+            UserBuilder builder = new UserBuilder();
+
+            User invalidUser = builder
+                .SetUserName("standard_gguser")
+                .SetPassword("secret_sauce")
+                .Build();
 
             LoginPage loginPage = new LoginPage(ChromeDriver, true);
             loginPage.IncorrectLogin(invalidUser);

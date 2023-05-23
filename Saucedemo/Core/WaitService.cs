@@ -4,7 +4,7 @@ using System;
 using NUnit.Framework;
 using SeleniumExtras.WaitHelpers;
 
-namespace Saucedemo.Tests
+namespace Core
 {
     public class WaitService
     {

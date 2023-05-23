@@ -4,7 +4,7 @@ using OpenQA.Selenium.Firefox;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
-namespace Saucedemo.Tests
+namespace Core
 {
     public class DriverFactory
     {
