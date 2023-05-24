@@ -1,4 +1,6 @@
 ﻿using Core.Models;
+using NLog;
+using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
 using Saucedemo.Tests;
 using System;
@@ -16,6 +18,8 @@ namespace Saucedemo.Pages
         By LoginButtonBy = By.Name("login-button");
         By ErrorMessageBy = By.ClassName("error-message-container");
 
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
+
         public LoginPage(IWebDriver? driver, bool openPageByUrl) : base(driver, openPageByUrl)
         {
         }
@@ -24,6 +28,7 @@ namespace Saucedemo.Pages
         {
         }
 
+        [AllureStep(name:"Navigate to Login page")]
         protected override void OpenPage()
         {
             ChromeDriver.Navigate().GoToUrl(BaseTest.BaseUrl);
@@ -41,6 +46,7 @@ namespace Saucedemo.Pages
             }
         }
 
+        [AllureStep]
         public void InputUserName(string userName)
         {
             ChromeDriver.FindElement(UserNameInputBy).SendKeys(userName);
@@ -66,6 +72,7 @@ namespace Saucedemo.Pages
         public InventoryPage SuccessfulLogin(User user)
         {
             Login(user);
+            _logger.Info(message: "Navigate to InventoryPage");
             return new InventoryPage(ChromeDriver);
         }
 
