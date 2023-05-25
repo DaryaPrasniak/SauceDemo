@@ -21,9 +21,9 @@ namespace Saucedemo.Tests
         [AllureSuite("PassedSuite")]
         [AllureSubSuite("GUI")]
         [AllureIssue(name:"TMS-46")]
-        [AllureTms(name:"TMS-13")]
+        [AllureTms(name:"TMS-43")]
         [AllureTag(tags:"Smoke")]
-        [AllureLink(url: "https://app.qase.io/project/SHARELANE")]      
+        [AllureLink(url: "https://app.qase.io/public/report/db59e4c48b2469ccdaffa44f1ee7d77ad3527e8a")]      
         public void Test1()
         {
             UserBuilder builder = new UserBuilder();
@@ -40,13 +40,16 @@ namespace Saucedemo.Tests
             Assert.IsTrue(inventoryPage.CheckInventoryItemsOnThePage());  
         }
 
-        [Test, Category("Negative")]
+        [Test (Description = "Incorrect login"), Category("Negative")]
         [Description("Detailed test description")]
         [AllureSeverity(SeverityLevel.critical)]
         [AllureOwner("User")]
         [AllureSuite("FailedSuite")]
         [AllureSubSuite("GUI")]
         [AllureIssue(name: "TMS-42")]
+        [AllureTms(name: "TMS-45")]
+        [AllureTag(tags: "Regression")]
+        [AllureLink(url: "https://app.qase.io/public/report/db59e4c48b2469ccdaffa44f1ee7d77ad3527e8a")]
         public void Test2()
         {
             UserBuilder builder = new UserBuilder();

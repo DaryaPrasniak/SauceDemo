@@ -1,4 +1,6 @@
 ﻿using Core.Models;
+using NLog;
+using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
 using Saucedemo.Tests;
 using System;
@@ -17,6 +19,7 @@ namespace Saucedemo.Pages
         By ContinueButtonBy = By.Id("continue");
         By CartErrorMessageBy = By.ClassName("error-button");
 
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         public CheckoutYourInfoPage(IWebDriver? driver, bool openPageByUrl) : base(driver, openPageByUrl)
         {
         }
@@ -73,6 +76,7 @@ namespace Saucedemo.Pages
         public CheckoutOverviewPage CorrectInputUserInfo(User user)
         { 
             InputUserInfo(user);
+            _logger.Info(message: "Navigate to CheckoutOverviewPage");
             return new CheckoutOverviewPage(ChromeDriver);
         }
 
@@ -81,6 +85,7 @@ namespace Saucedemo.Pages
             SetFirstName(user.FirstName);
             SetLastName(user.LastName);
             ClickContinueButton();
+            _logger.Info(message: "Navigate to CheckoutOverviewPage");
             return this;
         }
 

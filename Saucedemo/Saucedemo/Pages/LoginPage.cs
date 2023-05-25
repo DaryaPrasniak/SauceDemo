@@ -52,16 +52,19 @@ namespace Saucedemo.Pages
             ChromeDriver.FindElement(UserNameInputBy).SendKeys(userName);
         }
 
+        [AllureStep]
         public void InputPassword(string password)
         { 
             ChromeDriver.FindElement(PasswordInputBy).SendKeys(password);
         }
 
+        [AllureStep]
         public void ClickLoginButton()
         {
             ChromeDriver.FindElement(LoginButtonBy).Click();
         }
 
+        [AllureStep]
         public void Login(User user)
         {
             InputUserName(user.UserName);
@@ -69,6 +72,7 @@ namespace Saucedemo.Pages
             ClickLoginButton();
         }
 
+        [AllureStep]
         public InventoryPage SuccessfulLogin(User user)
         {
             Login(user);
@@ -76,12 +80,15 @@ namespace Saucedemo.Pages
             return new InventoryPage(ChromeDriver);
         }
 
+        [AllureStep]
         public LoginPage IncorrectLogin(User user)
         {
             Login(user);
+            _logger.Info(message: "Navigate to LoginPage");
             return this;
         }
 
+        [AllureStep]
         public bool CheckErrorMessage()
         {
            return ChromeDriver.FindElement(ErrorMessageBy).Displayed;

@@ -4,7 +4,7 @@
     "links": [
       "{links}",
       "https://qac01.atlassian.net/browse/{issue}",
-      "https://example.org/{tms}"
+      "https://qac01.atlassian.net/browse/{tms}"
     ]
   }
 }

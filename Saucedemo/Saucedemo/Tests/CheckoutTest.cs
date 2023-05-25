@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using Allure.Commons;
+using NUnit.Allure.Attributes;
+using NUnit.Framework;
 using Saucedemo.Pages;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,16 @@ namespace Saucedemo.Tests
 {
     internal class CheckoutTest: BaseTest
     {
-        [Test, Category("Positive")]
+        [Test(Description = "Successful checkout")]
+        [Description("Detailed test description")]
+        [AllureSeverity(SeverityLevel.blocker)]
+        [AllureOwner("User")]
+        [AllureSuite("PassedSuite")]
+        [AllureSubSuite("GUI")]
+        [AllureIssue(name: "TMS-46")]
+        [AllureTms(name: "TMS-44")]
+        [AllureTag(tags: "Smoke")]
+        [AllureLink(url: "https://app.qase.io/public/report/f482b13c702ded708b1bbe22b472f42d6e5220cc")]
         public void Test1()
         {
             var user = GetUser();
@@ -28,7 +39,16 @@ namespace Saucedemo.Tests
             Assert.That(checkoutCompletePage.CheckCompleteMessage, Is.EqualTo(expectedCompleteMessage));
         }
 
-        [Test, Category("Negative")]
+        [Test(Description = "Incorrect checkout")]
+        [Description("Detailed test description")]
+        [AllureSeverity(SeverityLevel.blocker)]
+        [AllureOwner("User")]
+        [AllureSuite("FailedSuite")]
+        [AllureSubSuite("GUI")]
+        [AllureIssue(name: "TMS-48")]
+        [AllureTms(name: "TMS-45")]
+        [AllureTag(tags: "Smoke")]
+        [AllureLink(url: "https://app.qase.io/public/report/f482b13c702ded708b1bbe22b472f42d6e5220cc")]
         public void Test2()
         {
             var user = GetUser();
@@ -40,7 +60,7 @@ namespace Saucedemo.Tests
                .ClickCheckoutButton()
                .IncorrectInputUserInfo(user);
 
-            Assert.IsTrue(checkoutYourInfoPage.CheckCartErrorMessage());
+            Assert.IsFalse(checkoutYourInfoPage.CheckCartErrorMessage());
         }
     }
 }

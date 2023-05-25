@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using NLog;
+using NUnit.Allure.Attributes;
+using OpenQA.Selenium;
 using Saucedemo.Tests;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,8 @@ namespace Saucedemo.Pages
     {
         By ItemInTheCartBy = By.ClassName("cart_item");
         By CheckoutButtonBy = By.Id("checkout");
+
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         public CartPage(IWebDriver? driver, bool openPageByUrl) : base(driver, openPageByUrl)
         {
@@ -46,6 +50,7 @@ namespace Saucedemo.Pages
         public CheckoutYourInfoPage ClickCheckoutButton()
         {
             ChromeDriver.FindElement(CheckoutButtonBy).Click();
+            _logger.Info(message: "Navigate to CheckoutYourInfoPage");
             return new CheckoutYourInfoPage(ChromeDriver);
         }
     }
