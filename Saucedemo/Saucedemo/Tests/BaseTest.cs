@@ -53,29 +53,5 @@ namespace Saucedemo.Tests
             }
             ChromeDriver?.Quit();
         }
-
-        protected User GetUser()
-        {
-            return new User()
-            {
-                UserName = "standard_user",
-                Password = "secret_sauce",
-                FirstName = "John",
-                LastName = "Smith",
-                ZipCode = "123456"
-            };
-        }
-
-        protected User GetInvalidUser()
-        {
-            return new User()
-            {
-                UserName = "standard_gguser",
-                Password = "secret_sauce",
-                FirstName = "John",
-                LastName = "Smith",
-                ZipCode = "123456"
-            };
-        }
     }
 }

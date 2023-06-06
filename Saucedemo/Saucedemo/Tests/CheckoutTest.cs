@@ -24,7 +24,7 @@ namespace Saucedemo.Tests
         [AllureLink(url: "https://app.qase.io/public/report/f482b13c702ded708b1bbe22b472f42d6e5220cc")]
         public void Test1()
         {
-            var user = GetUser();
+            var user = DataPreparationHelper.GetUser();
 
             var expectedCompleteMessage = "Thank you for your order!";
 
@@ -51,7 +51,7 @@ namespace Saucedemo.Tests
         [AllureLink(url: "https://app.qase.io/public/report/f482b13c702ded708b1bbe22b472f42d6e5220cc")]
         public void Test2()
         {
-            var user = GetUser();
+            var user = DataPreparationHelper.GetUser();
 
             var checkoutYourInfoPage = new LoginPage(ChromeDriver, true)
                .SuccessfulLogin(user)

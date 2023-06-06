@@ -14,7 +14,7 @@ namespace Saucedemo.Tests
         [Test]
         public void Test1()
         {
-            var user = GetUser();
+            var user = DataPreparationHelper.GetUser();
 
             var itemDetailedInfoPage = new LoginPage(ChromeDriver, true)
                 .SuccessfulLogin(user)
@@ -26,7 +26,7 @@ namespace Saucedemo.Tests
         [Test]
         public void Test2()
         {
-            var user = GetUser();
+            var user = DataPreparationHelper.GetUser();
 
             var itemDetailedInfoPage = new LoginPage(ChromeDriver, true)
                .SuccessfulLogin(user)
@@ -38,7 +38,7 @@ namespace Saucedemo.Tests
         [Test]
         public void Test3()
         {
-            var user = GetUser();
+            var user = DataPreparationHelper.GetUser();
 
             var itemDetailedInfoPage = new LoginPage(ChromeDriver, true)
                .SuccessfulLogin(user)
