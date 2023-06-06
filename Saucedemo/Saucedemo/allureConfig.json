@@ -1,0 +1,10 @@
+{
+  "allure": {
+    "directory": "allure-results",
+    "links": [
+      "{links}",
+      "https://qac01.atlassian.net/browse/{issue}",
+      "https://qac01.atlassian.net/browse/{tms}"
+    ]
+  }
+}
